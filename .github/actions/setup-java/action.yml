@@ -1,0 +1,14 @@
+name: Setup Java 17 and checkout
+description: Checks out code and setup Java 17
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v5
+
+    - name: Setp java
+      uses: actions/setup-java@v5
+      with:
+        distribution: temurin
+        java-version: 17
