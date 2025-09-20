@@ -25,7 +25,7 @@ jobs:
           key: ${{runner.os}}-sonar
           restore-keys: ${{runner.os}}-sonar
       
-      - name: Run SonarQube Analysis
+      - name: Run SonarQube Analysis( disable Automatic analysis )
         run: |
           mvn verify sonar:sonar \
             -Dsonar.projectKey=vardhan556_aks-java-demo \
