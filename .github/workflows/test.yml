@@ -21,6 +21,7 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
+          cache: maven
       
       - name: Run Unit Tests
         run: mvn test
