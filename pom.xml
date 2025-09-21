@@ -38,5 +38,11 @@
                 </plugin>
             </plugins>
         </build>
+        <distributionManagement>
+            <repository>
+                <id>jfrog-artifactory</id>
+                <url>https://trailezxell.jfrog.io/artifactory/maven-local</url>
+            </repository>
+        </distributionManagement>
 
 </project>
