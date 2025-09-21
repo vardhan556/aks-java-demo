@@ -116,7 +116,7 @@ jobs:
 
       - name: Configure JFrog CLI
         run: |
-          jfrog rt config --url=https://trialezxell.jfrog.io \
+          jfrog rt config --url=https://trialezxell.jfrog.io/artifactory \
           --user=${{secrets.JFROG_USERNAME}} \
           --password=${{secrets.JFROG_PASSWORD}} \
           --interactive=false
