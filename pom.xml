@@ -41,7 +41,7 @@
         <distributionManagement>
             <repository>
                 <id>jfrog-artifactory</id>
-                <url>https://trailezxell.jfrog.io/artifactory/maven-local</url>
+                <url>https://trialezxell.jfrog.io/artifactory/maven-local</url>
             </repository>
         </distributionManagement>
 
