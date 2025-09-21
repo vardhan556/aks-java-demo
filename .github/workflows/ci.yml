@@ -124,7 +124,7 @@ jobs:
       - name: Download JAR from Jfrog
         run: |
           jfrog rt dl "maven-local/com/example/aks-java-demo/1.0.0/aks-java-demo-1.0.0.jar" target/
-          mv target/aks-java-demo-1.0.0.jar target/app.jar
+          mv target/maven-local/com/example/aks-java-demo/1.0.0/aks-java-demo-1.0.0.jar target/app.jar
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
