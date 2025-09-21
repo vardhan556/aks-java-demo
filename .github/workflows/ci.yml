@@ -110,16 +110,15 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install JFrog CLI
-        run: |
-          curl -fL https://getcli.jfrog.io | sh
-          sudo mv jfrog /usr/local/bin/
+        run: jfrog/setup-jfrog-cli@v4
 
       - name: Configure JFrog CLI
         run: |
-          jfrog rt config --url=https://trialezxell.jfrog.io/artifactory \
-          --user=${{secrets.JFROG_USERNAME}} \
-          --password=${{secrets.JFROG_PASSWORD}} \
-          --interactive=false
+          jfrog rt config add my-server \
+            --artifactory-url=https://trialezxell.jfrog.io/artifactory \
+            --user=${{secrets.JFROG_USERNAME}} \
+            --password=${{secrets.JFROG_PASSWORD}} \
+            --interactive=false
 
       - name: Download JAR from Jfrog
         run: |
