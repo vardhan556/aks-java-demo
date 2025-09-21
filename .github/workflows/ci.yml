@@ -114,7 +114,7 @@ jobs:
 
       - name: Configure JFrog CLI
         run: |
-          jfrog rt config add my-server \
+          jfrog config add my-server \
             --artifactory-url=https://trialezxell.jfrog.io/artifactory \
             --user=${{secrets.JFROG_USERNAME}} \
             --password=${{secrets.JFROG_PASSWORD}} \
@@ -122,7 +122,7 @@ jobs:
 
       - name: Download JAR from Jfrog
         run: |
-          jfrog rt dl "maven-local/com/example/aks-java-demo/1.0.0/aks-java-demo-1.0.0.jar" target/ --flat=true --server-id=my-server
+          jfrog rt download "maven-local/com/example/aks-java-demo/1.0.0/aks-java-demo-1.0.0.jar" target/ --flat=true --server-id=my-server
           mv target/aks-java-demo-1.0.0.jar target/app.jar
 
       - name: Debug downloaded files (always run)
