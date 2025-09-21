@@ -123,8 +123,12 @@ jobs:
 
       - name: Download JAR from Jfrog
         run: |
-          jfrog rt dl "maven-local/com/example/aks-java-demo/1.0.0/aks-java-demo-1.0.0.jar" target/
-          mv target/maven-local/com/example/aks-java-demo/1.0.0/aks-java-demo-1.0.0.jar target/app.jar
+          jfrog rt dl "maven-local/com/example/aks-java-demo/1.0.0/aks-java-demo-1.0.0.jar" target/ --flat=true --server-id=my-server
+          mv target/aks-java-demo-1.0.0.jar target/app.jar
+
+      - name: Debug downloaded files (always run)
+        if: always()
+        run: ls -R target
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
