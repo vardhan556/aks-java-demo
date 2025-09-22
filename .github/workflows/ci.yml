@@ -39,6 +39,13 @@ jobs:
           </settings>
           EOF
 
+      - name: Set dynamic snapshot version
+        run: |
+          VERSION=1.0.0-SNAPSHOT-${{github.run_number}}-${GITHUB_SHA::7}
+          echo "PROJECT_VERSION=$VERSION" >> $GITHUB_ENV
+          mvn versions:set -DnewVersion=$VERSION
+          mvn versions:commit
+
       - name: Build and deploy to Jfrog
         run: mvn clean deploy -DskipTests
         env: 
@@ -122,12 +129,12 @@ jobs:
 
       - name: Download JAR from Jfrog
         run: |
-          jfrog rt download "maven-local/com/example/aks-java-demo/1.0.0/aks-java-demo-1.0.0.jar" target/ --flat=true --server-id=my-server
-          mv target/aks-java-demo-1.0.0.jar target/app.jar
+          jfrog rt download "maven-local/com/example/aks-java-demo/${{env.PROJECT_VERSION}}/aks-java-demo-${{env.PROJECT_VERSION}}.jar" target/ --flat=true --server-id=my-server
+          mv target/aks-java-demo-${env.PROJECT_VERSION}.jar target/app.jar
 
       - name: Debug downloaded files (always run)
         if: always()
-        run: ls -R target
+        run: ls -R target || echo "No target directory found"
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
@@ -144,6 +151,7 @@ jobs:
           context: .
           push: true
           tags: |
+            ${{secrets.DOCKER_USERNAME}}/aks-java-demo:ci-${{github.run_number}}
             ${{ secrets.DOCKER_USERNAME }}/aks-java-demo:latest
             ${{ secrets.DOCKER_USERNAME }}/aks-java-demo:${{ github.sha }}
           cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/aks-java-demo:buildcache

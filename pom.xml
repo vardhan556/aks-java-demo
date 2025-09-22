@@ -11,7 +11,7 @@
          </parent>
          <groupId>com.example</groupId>
          <artifactId>aks-java-demo</artifactId>
-         <version>1.0.0</version>
+         <version>1.0.0-SNAPSHOT</version>
          <packaging>jar</packaging>
          <name>aks-java-demo</name>
          <description>Simple Java Maven AKS Demo project</description>
