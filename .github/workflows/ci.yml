@@ -14,7 +14,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     outputs:
-      project_version: ${{steps.version.outputs.PROJECT_VERSION}}
+      project_version: ${{steps.version.outputs.project_version}}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -45,7 +45,7 @@ jobs:
         id: version
         run: |
           VERSION=1.0.0-SNAPSHOT-${{github.run_number}}-${GITHUB_SHA::7}
-          echo "PROJECT_VERSION=$VERSION" >> $GITHUB_OUTPUT
+          echo "project_version=$VERSION" >> $GITHUB_OUTPUT
           mvn versions:set -DnewVersion=$VERSION
           mvn versions:commit
 
