@@ -49,6 +49,11 @@ jobs:
           mvn versions:set -DnewVersion=$VERSION
           mvn versions:commit
 
+      - name: Debug build version
+        run: |
+          echo "Step output project_version: ${{steps.version.outputs.project_version}}"
+          echo "Env PROJECT_VERSION: $PROJECT_VERSION"
+
       - name: Build and deploy to Jfrog
         run: mvn clean deploy -DskipTests
         env: 
