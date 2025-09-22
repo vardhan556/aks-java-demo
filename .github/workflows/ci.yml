@@ -136,7 +136,8 @@ jobs:
             --interactive=false
 
       - name: Debug version
-        run: echo "Using project version: ${{needs.build.outputs.project_version}}"
+        run: |
+          echo "Using project version : ${{needs.build.outputs.project_version}}"
 
       - name: Download JAR from Jfrog
         run: |
