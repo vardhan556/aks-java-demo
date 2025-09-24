@@ -2,16 +2,24 @@ package com.example.aksdemo;
 
 import com.example.aksdemo.controller.HelloController;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.test.web.servlet.MockMvc;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class HelloControllerTest {
+@WebMvcTest(HelloController.class)
+class HelloControllerTest {
 
-    private final HelloController controller = new HelloController();
+    @Autowired
+    private MockMvc mockMvc;
 
     @Test
-    void testHelloEndpoint() {
-        String response = controller.hello();
-        assertThat(response).isEqualTo("Hello from Java Maven AKS Demo!");
+    void testHelloEndpoint() throws Exception {
+        mockMvc.perform(get("/hello"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Hello from Java Maven AKS Demo!"));
     }
 }
