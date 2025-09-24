@@ -18,3 +18,5 @@ spec:
       containers:
       - name: aks-java-demo
         image: vardhan556/aks-java-demo:latest
+        ports:
+          - containerPort: 80
