@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aks-java-demo
+  namespace: aks-java-demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: aks-java-demo
+  
+  template:
+    metadata:
+      labels:
+        app: aks-java-demo
+    
+    spec:
+      containers:
+      - name: aks-java-demo
+        image: vardhan556/aks-java-demo:latest
